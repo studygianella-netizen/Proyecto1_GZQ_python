@@ -13,8 +13,3 @@ sesion = st.sidebar.selectbox("Seleccione una sesión", ["Sesión 1","Sesión 2"
 
 if sesion == "Sesión 1":
   st.write("Bienvenido la sesión 1")
-  st.image("Image20260512194059.png" )
-
-
-   cuota = round(lf.cuota_prestamo(principal, tasa_anual, anios, pagos_anio),2)
-   st.write(f"El valor de la cuota es {cuota}")
