@@ -1,15 +1,25 @@
 import streamlit as st
 import numpy as np
 import libreria_funciones_proyecto1 as lf
-st.title("Mi primera aplicación en python")
+st.set_page_config(page_title="Proyecto Python", layout="wide")
 
-st.sidebar.title("Parámetros")
+menu = st.sidebar.selectbox(
+    "Seleccione una opción",
+    ["Home", "Ejercicio 1", "Ejercicio 2", "Ejercicio 3", "Ejercicio 4"]
+)
 
-st.write("Elaborado por: Gianella Z")
+if menu == "Home":
+    st.title("Proyecto Aplicado en Streamlit")
+    st.write("Bienvenido a mi aplicación")
 
-st.sidebar.image("Image20260512194119.png")
+elif menu == "Ejercicio 1":
+    st.title("Flujo de Caja")
 
-sesion = st.sidebar.selectbox("Seleccione una sesión", ["Sesión 1","Sesión 2","Sesión 3","Sesión 4"] )
+elif menu == "Ejercicio 2":
+    st.title("Registro de Productos")
 
-if sesion == "Sesión 1":
-  st.write("Bienvenido la sesión 1")
+elif menu == "Ejercicio 3":
+    st.title("Funciones Externas")
+
+elif menu == "Ejercicio 4":
+    st.title("CRUD con Clases")
