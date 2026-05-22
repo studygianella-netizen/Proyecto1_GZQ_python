@@ -39,12 +39,12 @@ if menu == "Home":
     
 elif menu == "Ejercicio 1":
     st.title("Flujo de Caja")
-    if "movimientos" not in st.session_state:
+if "movimientos" not in st.session_state:
     st.session_state.movimientos = []
     st.markdown("""
     En este ejercicio se registran ingresos y gastos para calcular
     el flujo de caja final.
-    """)
+        """)
 
     concepto = st.text_input("Concepto")
 
