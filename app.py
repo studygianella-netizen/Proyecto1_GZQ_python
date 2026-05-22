@@ -12,6 +12,7 @@ st.sidebar.title("Parámetros")
 st.write("Elaborado por: Gianella Zorrilla Quispe")
 st.write ("Curso: Especialización en Python potenciado con IA - Edición - 58")
 st.write ("2026")
+st.image("fondo.png")
 
 menu = st.sidebar.selectbox("Seleccione una opción",
     ["Home", "Ejercicio 1", "Ejercicio 2", "Ejercicio 3", "Ejercicio 4"])
