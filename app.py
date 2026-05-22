@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-import libreria_funciones as lf
+import libreria_funciones_proyecto1 as lf
 st.title("Mi primera aplicación en python")
 
 st.sidebar.title("Parámetros")
