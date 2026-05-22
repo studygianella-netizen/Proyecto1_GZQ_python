@@ -1,7 +1,12 @@
 import streamlit as st
 import numpy as np
 import libreria_funciones_proyecto1 as lf
-st.set_page_config(page_title="Proyecto Python", layout="wide")
+st.set_page_config(page_title="Proyecto 1 Python", layout="wide")
+
+st.sidebar.title("Parámetros")
+
+st.write("Elaborado por: Gianella Zorrilla Quispe")
+st.write ("Especialización en Python potenciado con IA - Edición - 58")
 
 menu = st.sidebar.selectbox(
     "Seleccione una opción",
