@@ -31,6 +31,60 @@ if menu == "Home":
     
 elif menu == "Ejercicio 1":
     st.title("Flujo de Caja")
+        st.markdown("""
+    En este ejercicio se registran ingresos y gastos para calcular
+    el flujo de caja final.
+    """)
+
+    concepto = st.text_input("Concepto")
+
+    tipo = st.selectbox(
+        "Tipo de Movimiento",
+        ["Ingreso", "Gasto"]
+    )
+
+    valor = st.number_input(
+        "Valor",
+        min_value=0.0,
+        step=1.0
+    )
+
+    if st.button("Agregar Movimiento"):
+
+        movimiento = {
+            "Concepto": concepto,
+            "Tipo": tipo,
+            "Valor": valor
+        }
+
+        st.session_state.movimientos.append(movimiento)
+
+        st.success("Movimiento agregado correctamente")
+
+    if len(st.session_state.movimientos) > 0:
+
+        df_movimientos = pd.DataFrame(st.session_state.movimientos)
+
+        st.write("### Movimientos Registrados")
+
+        st.dataframe(df_movimientos)
+
+        ingresos = df_movimientos[df_movimientos["Tipo"] == "Ingreso"]["Valor"].sum()
+
+        gastos = df_movimientos[df_movimientos["Tipo"] == "Gasto"]["Valor"].sum()
+
+        saldo = ingresos - gastos
+
+        col1, col2, col3 = st.columns(3)
+
+        col1.metric("Total Ingresos", f"S/ {ingresos:.2f}")
+        col2.metric("Total Gastos", f"S/ {gastos:.2f}")
+        col3.metric("Saldo Final", f"S/ {saldo:.2f}")
+
+        if saldo >= 0:
+            st.success("El flujo de caja está A FAVOR")
+        else:
+            st.error("El flujo de caja está EN CONTRA")
 
 elif menu == "Ejercicio 2":
     st.title("Registro de Productos")
