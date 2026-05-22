@@ -4,6 +4,49 @@ import numpy as np
 import libreria_funciones_proyecto1 as lf
 st.set_page_config(page_title="Proyecto 1 Python", layout="wide")
 
+
+
+
+# =====================================================
+# SESSION STATE
+# =====================================================
+
+if "movimientos" not in st.session_state:
+    st.session_state.movimientos = []
+
+if "productos" not in st.session_state:
+    st.session_state.productos = []
+
+if "historial_funciones" not in st.session_state:
+    st.session_state.historial_funciones = []
+
+if "empleados" not in st.session_state:
+    st.session_state.empleados = []
+
+# =====================================================
+# FUNCIONES EJERCICIO 3
+# =====================================================
+
+def calcular_bono(sueldo, porcentaje):
+    bono = sueldo * (porcentaje / 100)
+    total = sueldo + bono
+    return bono, total
+
+# =====================================================
+# CLASE EJERCICIO 4
+# =====================================================
+
+class Empleado:
+
+    def __init__(self, nombre, cargo, sueldo):
+        self.nombre = nombre
+        self.cargo = cargo
+        self.sueldo = sueldo
+
+
+
+
+
 st.sidebar.image("python.png")
 
 st.title("PROYECTO 1")
@@ -18,9 +61,8 @@ st.image("fondo.png")
 menu = st.sidebar.selectbox("Seleccione una opción",
     ["Home", "Ejercicio 1", "Ejercicio 2", "Ejercicio 3", "Ejercicio 4"])
 
-# ===================================================
-# HOME
-# ===============================================
+
+
 if menu == "Home":
     st.write("Bienvenido a mi aplicación")
     st.write("Descripción del proyecto:")
@@ -33,14 +75,10 @@ if menu == "Home":
     - NumPy
     """)
 
-# ===================================================
-# EJERCICIO 1
-# ===============================================
-    
+
+
 elif menu == "Ejercicio 1":
     st.title("Flujo de Caja")
-if "movimientos" not in st.session_state:
-    st.session_state.movimientos = []
     st.markdown("""
     En este ejercicio se registran ingresos y gastos para calcular
     el flujo de caja final.
