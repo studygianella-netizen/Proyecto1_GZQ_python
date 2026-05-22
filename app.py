@@ -3,6 +3,42 @@ import numpy as np
 import libreria_funciones_proyecto1 as lf
 st.set_page_config(page_title="Proyecto 1 Python", layout="wide")
 
+# =====================================================
+# SESSION STATE
+# =====================================================
+
+if "movimientos" not in st.session_state:
+    st.session_state.movimientos = []
+
+if "productos" not in st.session_state:
+    st.session_state.productos = []
+
+if "historial_funciones" not in st.session_state:
+    st.session_state.historial_funciones = []
+
+if "empleados" not in st.session_state:
+    st.session_state.empleados = []
+
+# =====================================================
+# FUNCIONES EJERCICIO 3
+# =====================================================
+
+def calcular_bono(sueldo, porcentaje):
+    bono = sueldo * (porcentaje / 100)
+    total = sueldo + bono
+    return bono, total
+
+# =====================================================
+# CLASE EJERCICIO 4
+# =====================================================
+
+class Empleado:
+
+    def __init__(self, nombre, cargo, sueldo):
+        self.nombre = nombre
+        self.cargo = cargo
+        self.sueldo = sueldo
+
 st.sidebar.image("python.png")
 
 st.title("PROYECTO 1")
