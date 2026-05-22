@@ -31,7 +31,7 @@ if menu == "Home":
     
 elif menu == "Ejercicio 1":
     st.title("Flujo de Caja")
-        st.markdown("""
+    st.markdown("""
     En este ejercicio se registran ingresos y gastos para calcular
     el flujo de caja final.
     """)
