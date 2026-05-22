@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 import numpy as np
 import libreria_funciones_proyecto1 as lf
 st.set_page_config(page_title="Proyecto 1 Python", layout="wide")
