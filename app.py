@@ -182,6 +182,47 @@ elif menu == "Ejercicio 2":
 
 elif menu == "Ejercicio 3":
     st.title("Funciones Externas")
+    st.markdown("""
+    En este ejercicio se utiliza una función para calcular
+    bonos salariales.
+    """)
+
+    sueldo = st.number_input("Ingrese el sueldo",
+        min_value=0.0,
+        step=100.0)
+
+    porcentaje = st.number_input("Ingrese porcentaje de bono",
+        min_value=0.0,
+        max_value=100.0,
+        step=1.0)
+
+    if st.button("Calcular Bono"):
+
+        bono, total = calcular_bono(sueldo, porcentaje)
+
+        st.write(f"### Bono: S/ {bono:.2f}")
+        st.write(f"### Total a recibir: S/ {total:.2f}")
+
+        historial = {
+            "Sueldo": sueldo,
+            "Porcentaje": porcentaje,
+            "Bono": bono,
+            "Total": total
+        }
+
+        st.session_state.historial_funciones.append(historial)
+
+    if len(st.session_state.historial_funciones) > 0:
+
+        df_historial = pd.DataFrame(
+            st.session_state.historial_funciones
+        )
+
+        st.write("### Historial")
+
+        st.dataframe(df_historial)
+
+
 
 elif menu == "Ejercicio 4":
     st.title("CRUD con Clases")
