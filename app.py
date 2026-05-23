@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import libreria_funciones_proyecto1 as lf
 
-from librería_clases_proyecto1 import Empleado
+from librería_clases_proyecto1 import Empleado
 st.set_page_config(page_title="Proyecto 1 Python", layout="wide")
 
 
