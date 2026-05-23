@@ -139,7 +139,9 @@ elif menu == "Ejercicio 1":
 elif menu == "Ejercicio 2":
     st.title("Registro de Productos")
 
-     st.markdown("""Registro de productos utilizando NumPy y DataFrames.""")
+    st.markdown("""
+    Registro de productos utilizando NumPy y DataFrames.
+    """)
 
     producto = st.text_input("Nombre del Producto")
 
