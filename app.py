@@ -134,8 +134,49 @@ elif menu == "Ejercicio 1":
         else:
             st.error("El flujo de caja está EN CONTRA")
 
+
+
 elif menu == "Ejercicio 2":
     st.title("Registro de Productos")
+
+     st.markdown("""Registro de productos utilizando NumPy y DataFrames.""")
+
+    producto = st.text_input("Nombre del Producto")
+
+    categoria = st.selectbox("Categoría",
+        ["Tecnología","Oficina","Hogar","Educación"])
+
+    precio = st.number_input("Precio", min_value=0.0, step=1.0)
+
+    cantidad = st.number_input("Cantidad", min_value=1, step=1)
+
+    if st.button("Agregar Producto"):
+
+        total = precio * cantidad
+
+        registro = np.array([
+            producto,
+            categoria,
+            precio,
+            cantidad,
+            total
+        ], dtype=object)
+
+        st.session_state.productos.append(registro)
+
+        st.success("Producto agregado correctamente")
+
+    if len(st.session_state.productos) > 0:
+
+        df_productos = pd.DataFrame(
+            st.session_state.productos,
+            columns=["Producto","Categoría","Precio","Cantidad","Total"])
+
+        st.write("### Productos Registrados")
+
+        st.dataframe(df_productos)
+
+
 
 elif menu == "Ejercicio 3":
     st.title("Funciones Externas")
