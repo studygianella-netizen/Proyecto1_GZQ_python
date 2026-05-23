@@ -45,6 +45,7 @@ st.title("PROYECTO 1")
 st.sidebar.title("Parámetros")
 
 st.write("Elaborado por: Gianella Zorrilla Quispe")
+st.write("Carrera: Administración de empresas")
 st.write ("Curso: Especialización en Python potenciado con IA - Edición - 58")
 st.write ("Año: 2026")
 st.image("fondo.png")
