@@ -34,19 +34,6 @@ def calcular_bono(sueldo, porcentaje):
     total = sueldo + bono
     return bono, total
 
-# =====================================================
-# CLASE EJERCICIO 4
-# =====================================================
-
-class Empleado:
-
-    def __init__(self, nombre, cargo, sueldo):
-        self.nombre = nombre
-        self.cargo = cargo
-        self.sueldo = sueldo
-
-
-
 
 
 st.sidebar.image("python.png")
