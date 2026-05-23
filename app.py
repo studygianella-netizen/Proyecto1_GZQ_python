@@ -4,7 +4,9 @@ import numpy as np
 import libreria_funciones_proyecto1 as lf
 
 from librería_clases_proyecto1 import Empleado
+
 st.set_page_config(page_title="Proyecto 1 Python", layout="wide")
+
 
 
 
@@ -216,48 +218,61 @@ elif menu == "Ejercicio 3":
 elif menu == "Ejercicio 4":
     st.title("CRUD con Clases")
     st.markdown("""
-    Sistema CRUD utilizando Programación Orientada a Objetos (POO)
-    con clases importadas desde una librería externa.
+    Sistema CRUD utilizando la clase Empleado
+    desde la librería externa proporcionada.
     """)
 
     # =================================================
     # CREAR
     # =================================================
 
-    st.subheader("Crear Empleado")
+    st.subheader("Registrar Empleado")
 
-    nombre = st.text_input("Nombre del Empleado")
+    nombre = st.text_input("Nombre del empleado")
 
-    cargo = st.text_input("Cargo")
-
-    sueldo = st.number_input(
-        "Sueldo",
+    salario_base = st.number_input(
+        "Salario Base",
         min_value=0.0,
         step=100.0
     )
 
+    porcentaje_bono = st.number_input(
+        "Porcentaje Bono",
+        min_value=0.0,
+        max_value=100.0,
+        step=1.0
+    )
+
+    porcentaje_descuento = st.number_input(
+        "Porcentaje Descuento",
+        min_value=0.0,
+        max_value=100.0,
+        step=1.0
+    )
+
     if st.button("Guardar Empleado"):
 
-        if nombre != "" and cargo != "":
+        try:
 
-            nuevo_empleado = Empleado(
+            empleado = Empleado(
                 nombre,
-                cargo,
-                sueldo
+                salario_base,
+                porcentaje_bono,
+                porcentaje_descuento
             )
 
             st.session_state.empleados.append(
-                nuevo_empleado.mostrar_datos()
+                empleado.resumen()
             )
 
             st.success("Empleado registrado correctamente")
 
-        else:
+        except Exception as e:
 
-            st.error("Complete todos los campos")
+            st.error(f"Error: {e}")
 
     # =================================================
-    # LEER
+    # MOSTRAR REGISTROS
     # =================================================
 
     if len(st.session_state.empleados) > 0:
@@ -280,35 +295,32 @@ elif menu == "Ejercicio 4":
             "Seleccione empleado",
             range(len(st.session_state.empleados)),
             format_func=lambda x:
-            st.session_state.empleados[x]["Nombre"]
+            st.session_state.empleados[x]["nombre"]
         )
 
-        nuevo_nombre = st.text_input(
-            "Nuevo Nombre"
-        )
-
-        nuevo_cargo = st.text_input(
-            "Nuevo Cargo"
-        )
-
-        nuevo_sueldo = st.number_input(
-            "Nuevo Sueldo",
+        nuevo_bono = st.number_input(
+            "Nuevo porcentaje bono",
             min_value=0.0,
-            step=100.0,
-            key="nuevo_sueldo"
+            max_value=100.0,
+            step=1.0,
+            key="nuevo_bono"
+        )
+
+        nuevo_descuento = st.number_input(
+            "Nuevo porcentaje descuento",
+            min_value=0.0,
+            max_value=100.0,
+            step=1.0,
+            key="nuevo_descuento"
         )
 
         if st.button("Actualizar Empleado"):
 
-            if nuevo_nombre != "":
-                st.session_state.empleados[indice_actualizar]["Nombre"] = nuevo_nombre
+            st.session_state.empleados[indice_actualizar]["bono"] = nuevo_bono
 
-            if nuevo_cargo != "":
-                st.session_state.empleados[indice_actualizar]["Cargo"] = nuevo_cargo
+            st.session_state.empleados[indice_actualizar]["descuento"] = nuevo_descuento
 
-            st.session_state.empleados[indice_actualizar]["Sueldo"] = nuevo_sueldo
-
-            st.success("Empleado actualizado correctamente")
+            st.success("Empleado actualizado")
 
         # =============================================
         # ELIMINAR
@@ -320,7 +332,7 @@ elif menu == "Ejercicio 4":
             "Seleccione empleado a eliminar",
             range(len(st.session_state.empleados)),
             format_func=lambda x:
-            st.session_state.empleados[x]["Nombre"],
+            st.session_state.empleados[x]["nombre"],
             key="eliminar"
         )
 
