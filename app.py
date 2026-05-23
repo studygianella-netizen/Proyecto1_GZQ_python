@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import libreria_funciones_proyecto1 as lf
+
+from libreria_clases_proyecto1 import Empleado
 st.set_page_config(page_title="Proyecto 1 Python", layout="wide")
 
 
@@ -226,3 +228,119 @@ elif menu == "Ejercicio 3":
 
 elif menu == "Ejercicio 4":
     st.title("CRUD con Clases")
+    st.markdown("""
+    Sistema CRUD utilizando Programación Orientada a Objetos (POO)
+    con clases importadas desde una librería externa.
+    """)
+
+    # =================================================
+    # CREAR
+    # =================================================
+
+    st.subheader("Crear Empleado")
+
+    nombre = st.text_input("Nombre del Empleado")
+
+    cargo = st.text_input("Cargo")
+
+    sueldo = st.number_input(
+        "Sueldo",
+        min_value=0.0,
+        step=100.0
+    )
+
+    if st.button("Guardar Empleado"):
+
+        if nombre != "" and cargo != "":
+
+            nuevo_empleado = Empleado(
+                nombre,
+                cargo,
+                sueldo
+            )
+
+            st.session_state.empleados.append(
+                nuevo_empleado.mostrar_datos()
+            )
+
+            st.success("Empleado registrado correctamente")
+
+        else:
+
+            st.error("Complete todos los campos")
+
+    # =================================================
+    # LEER
+    # =================================================
+
+    if len(st.session_state.empleados) > 0:
+
+        st.subheader("Lista de Empleados")
+
+        df_empleados = pd.DataFrame(
+            st.session_state.empleados
+        )
+
+        st.dataframe(df_empleados)
+
+        # =============================================
+        # ACTUALIZAR
+        # =============================================
+
+        st.subheader("Actualizar Empleado")
+
+        indice_actualizar = st.selectbox(
+            "Seleccione empleado",
+            range(len(st.session_state.empleados)),
+            format_func=lambda x:
+            st.session_state.empleados[x]["Nombre"]
+        )
+
+        nuevo_nombre = st.text_input(
+            "Nuevo Nombre"
+        )
+
+        nuevo_cargo = st.text_input(
+            "Nuevo Cargo"
+        )
+
+        nuevo_sueldo = st.number_input(
+            "Nuevo Sueldo",
+            min_value=0.0,
+            step=100.0,
+            key="nuevo_sueldo"
+        )
+
+        if st.button("Actualizar Empleado"):
+
+            if nuevo_nombre != "":
+                st.session_state.empleados[indice_actualizar]["Nombre"] = nuevo_nombre
+
+            if nuevo_cargo != "":
+                st.session_state.empleados[indice_actualizar]["Cargo"] = nuevo_cargo
+
+            st.session_state.empleados[indice_actualizar]["Sueldo"] = nuevo_sueldo
+
+            st.success("Empleado actualizado correctamente")
+
+        # =============================================
+        # ELIMINAR
+        # =============================================
+
+        st.subheader("Eliminar Empleado")
+
+        indice_eliminar = st.selectbox(
+            "Seleccione empleado a eliminar",
+            range(len(st.session_state.empleados)),
+            format_func=lambda x:
+            st.session_state.empleados[x]["Nombre"],
+            key="eliminar"
+        )
+
+        if st.button("Eliminar Empleado"):
+
+            st.session_state.empleados.pop(
+                indice_eliminar
+            )
+
+            st.warning("Empleado eliminado correctamente")
